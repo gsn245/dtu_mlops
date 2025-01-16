@@ -26,6 +26,7 @@ log = logging.getLogger(__name__)
 
 
 def setup_data_model(cfg):
+    """Setup data and model."""
     torch.manual_seed(cfg.hyperparameters.seed)
     # Model Hyperparameters
 
@@ -62,6 +63,7 @@ def loss_function(x, x_hat, mean, log_var):
 
 
 def train(cfg, train_loader, model):
+    """Train the model."""
     optimizer = Adam(model.parameters(), lr=cfg.hyperparameters.lr)
 
     log.info("Start training VAE...")
@@ -93,6 +95,7 @@ def train(cfg, train_loader, model):
 
 
 def test(cfg, test_loader, model):
+    """Test the model."""
     # Generate reconstructions
     model.eval()
     with torch.no_grad():
@@ -109,6 +112,7 @@ def test(cfg, test_loader, model):
 
 
 def generate_samples(cfg, decoder):
+    """Generate samples from the model."""
     # Generate samples
     with torch.no_grad():
         noise = torch.randn(cfg.hyperparameters.batch_size, 20).to(DEVICE)
@@ -119,6 +123,7 @@ def generate_samples(cfg, decoder):
 
 @hydra.main(config_name="config.yaml", config_path="conf")
 def main(cfg):
+    """Main function."""
     print(cfg)
     train_loader, test_loader, encoder, decoder, model = setup_data_model(cfg)
     train(cfg, train_loader, model)
