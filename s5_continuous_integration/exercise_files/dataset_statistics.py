@@ -1,11 +1,11 @@
 import matplotlib.pyplot as plt
 import torch
 import typer
-from mnist_dataset import MnistDataset
+from dataset import MnistDataset
 from utils import show_image_and_target
 
 
-def dataset_statistics(datadir: str = "data") -> None:
+def dataset_statistics(datadir: str = "data/raw/corruptmnist_v1") -> None:
     """Compute dataset statistics."""
     train_dataset = MnistDataset(data_folder=datadir, train=True)
     test_dataset = MnistDataset(data_folder=datadir, train=False)
