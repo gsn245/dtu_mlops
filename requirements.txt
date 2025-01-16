@@ -17,6 +17,12 @@ pre-commit == 4.0.1
 ipython == 8.31.0
 invoke == 2.2.0
 
+# dvc
+dvc
+dvc-gdrive
+dvc-gs
+
+
 # new stuff
 annotated-types==0.7.0
 antlr4-python3-runtime==4.9.3
