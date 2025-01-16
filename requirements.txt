@@ -19,7 +19,6 @@ invoke == 2.2.0
 
 # dvc
 dvc
-dvc-gdrive
 dvc-gs
 
 
