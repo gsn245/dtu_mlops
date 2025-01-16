@@ -32,8 +32,20 @@ jobs:
           credentials_json: ${{ secrets.GCP_SA_KEY }}
       - name: Pull data
         run: |
-          python -m dvc pull --no-run-cache
+          dvc pull --no-run-cache
       - name: Check data statistics
         run: |
-          python scripts/data_statistics.py
+          python scripts/data_statistics.py > data_statistics.md
+          echo '![](./mnist_images.png "MNIST images")' >> data_statistics.md
+          echo '![](./train_label_distribution.png "Train label distribution")' >> data_statistics.md
+          echo '![](./test_label_distribution.png "Test label distribution")' >> data_statistics.md
+
+      - name: Setup cml
+        uses: iterative/setup-cml@v2
+
+      - name: Comment on PR
+        env:
+          REPO_TOKEN: ${{ secrets.GITTY_TOKEN }}
+        run: |
+          cml comment create data_statistics.md --watermark-title="Data Checker" # (1)!
 
