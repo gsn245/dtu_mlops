@@ -42,6 +42,7 @@ class MnistDataset(Dataset):
         images, target = [], []
         if self.train:
             nb_files = len([f for f in os.listdir(self.data_folder) if f.startswith("train_images")])
+            
             for i in range(nb_files):
                 images.append(torch.load(f"{self.data_folder}/train_images_{i}.pt"))
                 target.append(torch.load(f"{self.data_folder}/train_target_{i}.pt"))
